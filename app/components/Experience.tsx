@@ -4,15 +4,15 @@ const experiences = [
   {
     title: "Senior Software Developer",
     company: "Tech Innovators Inc.",
-    period: "2022 - Present",
+    period: "2023 - 2024",
     description: "Lead development of scalable web applications using React and Node.js.",
   },
   {
-    title: "Software Developer",
+    title: "Senior MERN Stack Developer",
     company: "Structures LTD Software House",
-    period: "2021 - 2022",
+    period: "2024 - 2025",
     description: "Developed and maintained full-stack applications using various technologies.",
-    projects: ["Rentrush - A property rental management system", "Travel Air - An online flight booking platform"],
+    // projects: ["Rentrush - A Car rental management system", "Travel Air - An online flight booking platform"],
   },
 ]
 

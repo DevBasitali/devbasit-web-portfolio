@@ -1,33 +1,52 @@
-import nodemailer from 'nodemailer'; // Importing Nodemailer for sending emails.
+import nodemailer from "nodemailer";
 
-export async function POST(req) { // Defining a POST function to handle incoming requests.
-  const { name, email, message } = await req.json(); // Parsing the JSON body of the request.
+export async function POST(req) {
+  const { name, email, message } = await req.json();
 
-  // Validate the input
-  if (!name || !email || !message) { // Checking if all fields are filled.
-    return new Response(JSON.stringify({ error: 'All fields are required.' }), { status: 400 }); // Returning an error response if validation fails.
+  if (!name || !email || !message) {
+    return new Response(JSON.stringify({ error: "All fields are required." }), {
+      status: 400,
+    });
   }
 
   try {
-    // Set up Nodemailer
     const transporter = nodemailer.createTransport({
-      service: 'Gmail', // Using Gmail as the email service.
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
       auth: {
-        user: process.env.EMAIL_USER, // Your email from environment variables.
-        pass: process.env.EMAIL_PASS, // Your email password from environment variables.
+        user: "rajaalix2022@gmail.com",
+        pass: "izvm wgbe qver xrlm",
       },
     });
 
-    await transporter.sendMail({ // Sending the email.
-      from: email, // The sender's email.
-      to: process.env.RECIPIENT_EMAIL, // The recipient's email from environment variables.
-      subject: `New Contact Form Submission from ${name}`, // Subject of the email.
-      text: message, // The message content.
+    const info = await transporter.sendMail({
+      from: `"${name}" <${email}>`,
+      to: "rajaalix2022@gmail.com",
+      subject: `Client wants to send you a message: ${name}`,
+      text: `Message from ${name} (${email}): ${message}`,
+      html: 
+      `<div style="font-family: Arial, sans-serif; line-height: 1.5; color: #333;">
+        <h2 style="color: #4CAF50;">Message from: ${name}</h2>
+        <p style="font-size: 16px;">Email: <strong>${email}</strong></p>
+        <p style="font-size: 16px;">Msg:</p>
+        <p style="border: 1px solid #ccc; padding: 10px; background-color: #f9f9f9;">${message}</p>
+      </div>`
+      ,
     });
 
-    return new Response(JSON.stringify({ message: 'Message sent successfully!' }), { status: 200 }); // Returning a success response.
+    return new Response(
+      JSON.stringify({ message: "Message sent successfully!" }),
+      { status: 200 }
+    );
   } catch (error) {
-    console.error(error); // Logging any errors that occur.
-    return new Response(JSON.stringify({ error: 'Failed to send message.' }), { status: 500 }); // Returning an error response if sending fails.
+    console.error("Error sending email:", error);
+    return new Response(
+      JSON.stringify({
+        error:
+          "Failed to send message. Please check your credentials and try again.",
+      }),
+      { status: 500 }
+    );
   }
 }

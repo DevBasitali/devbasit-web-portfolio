@@ -12,13 +12,12 @@ export default function Contact() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   // const [success, setSuccess] = useState('');
-  const [alert, setAlert] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     setError('');
-    // setSuccess('');
-    setAlert('');
+    setSuccess('');
 
     try {
       const response = await axios.post('http://localhost:3000/api/contact', {
@@ -26,8 +25,7 @@ export default function Contact() {
         email,
         message,
       });
-      setAlert(response.data.message);
-      // setSuccess(response.data.message);
+      setSuccess(response.data.message);
       setName('');
       setEmail('');
       setMessage('');
@@ -78,7 +76,7 @@ export default function Contact() {
               </div>
             </div>
             {error && <p className="text-red-500">{error}</p>}
-            {alert && <p className="text-green-500">{alert}</p>}
+            {success && <p className="text-green-500">{success}</p>}
           </form>
         </CardContent>
         <CardFooter>

@@ -20,8 +20,7 @@ export default function Contact() {
     setSuccess('');
 
     try {
-      // const response = await axios.post('http://localhost:3000/api/contact', {
-      const response = await axios.post('https://devbasit-web-portfolio.vercel.app', {
+      const response = await axios.post('http://localhost:3000/api/contact', {
         name,
         email,
         message,

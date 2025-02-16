@@ -24,7 +24,7 @@ export async function POST(req) {
         const info = await transporter.sendMail({
             from: `"${name}" <${email}>`,
             to: "rajaalix2022@gmail.com",
-            subject: `${name}wants to send you a message`,
+            subject: `Client wants to send you a message: ${name}`,
             text: `Message from ${name} (${email}): ${message}`,
             html: 
             `<div style="font-family: Arial, sans-serif; line-height: 1.5; color: #333;">
